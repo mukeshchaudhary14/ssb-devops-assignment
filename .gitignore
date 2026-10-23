@@ -1,0 +1,11 @@
+# Environment secrets
+.env
+app/.env
+
+# Backups and logs
+*.sql
+*.tar.gz
+*.log
+
+# System files
+.DS_Store
