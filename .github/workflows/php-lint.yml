@@ -1,0 +1,36 @@
+name: PHP Syntax Linting CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  php-lint:
+    name: Validate PHP Syntax
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP Environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo, pdo_mysql
+
+      - name: Execute PHP Syntax Check (Lint)
+        run: |
+          echo "🔍 Scanning PHP files for syntax errors..."
+          ERRORS=0
+          for file in $(find app/ -name "*.php"); do
+            php -l "$file" || ERRORS=$((ERRORS+1))
+          done
+          
+          if [ $ERRORS -ne 0 ]; then
+            echo "❌ Linting Failed: $ERRORS syntax error(s) detected!"
+            exit 1
+          fi
+          echo "✅ All PHP files passed syntax validation successfully!"

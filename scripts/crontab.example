@@ -1,0 +1,7 @@
+# ====================================================================
+# SSB Digital - Crontab Schedule for Daily Automated Backups
+# ====================================================================
+# Syntax: m h dom mon dow command
+#
+# Runs every day at 02:00 AM midnight:
+0 2 * * * /home/mukesh/ssb-devops-assignment/scripts/backup.sh >> /var/log/ssb_backup.log 2>&1

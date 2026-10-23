@@ -1,7 +1,7 @@
 <?php
 require_once 'db.php';
 
-// Create: नया टास्क जोड़ना
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
     $title = trim($_POST['title']);
     if (!empty($title)) {
@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
     exit;
 }
 
-// Update: स्टेटस मार्क करना
 if (isset($_GET['complete_id'])) {
     $id = (int)$_GET['complete_id'];
     $stmt = $pdo->prepare("UPDATE tasks SET status = 'Completed' WHERE id = ?");
@@ -21,7 +20,7 @@ if (isset($_GET['complete_id'])) {
     exit;
 }
 
-// Read: लिस्ट फेच करना
+
 $stmt = $pdo->query("SELECT * FROM tasks ORDER BY id DESC");
 $tasks = $stmt->fetchAll();
 ?>

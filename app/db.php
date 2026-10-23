@@ -1,8 +1,7 @@
 <?php
-// .env फाइल को रीड करने का सिंपल फंक्शन
 function loadEnv($path) {
     if (!file_exists($path)) {
-        die("Error: .env file not found!");
+        die("Error: .env file not found at " . htmlspecialchars($path));
     }
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {

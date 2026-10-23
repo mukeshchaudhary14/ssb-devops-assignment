@@ -1,10 +1,10 @@
-# Environment secrets
+# Environment secrets (Sensitive passwords)
 .env
 app/.env
 
-# Backups and logs
-*.sql
-*.tar.gz
+# Local runtime backups and logs
+backups/*
+!backups/.gitkeep
 *.log
 
 # System files
