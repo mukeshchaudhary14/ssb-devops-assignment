@@ -88,27 +88,25 @@ ssb-devops-assignment/
 │   └── incident-note.md        # Comprehensive incident post-mortem (Task H)
 ├── backups/                    # Local storage for timestamped backups (Git-ignored)
 ├── screenshots/                # Audit evidence archive
-│   ├── 01_project_init.png
-│   ├── 02_install_apache.png
-│   ├── 03_install_mysql.png
-│   ├── 04_install_php.png
-│   ├── 05_install_tools_phpmyadmin.png
-│   ├── 06_service_and_port_checks.png
-│   ├── 07_phpinfo_browser.png
-│   ├── 08_mysql_user_setup.png
-│   ├── 09_mysql_table_and_data.png
-│   ├── 10_phpmyadmin_login.png
-│   ├── 11_phpmyadmin_dashboard.png
-│   ├── 12_schema_export.png
-│   ├── 13_app_code_creation.png
-│   ├── 14_initial_deploy_404.png
-│   ├── 15_live_app_portal.png
-│   ├── 16_rsync_incremental.png
-│   ├── 17_app_v1_updated.png
-│   ├── 18_backup_restore.png
-│   ├── 19_troubleshooting_db_error.png
-│   ├── 20_service_inactive_logs.png
-│   └── 21_virtualhost_browser.png
+│   ├── 1.png                   # Project init & directory structure
+│   ├── 2.png                   # Apache installation
+│   ├── 3.png                   # MySQL installation
+│   ├── 4.png                   # PHP installation
+│   ├── 5.png                   # Tools & phpMyAdmin installation
+│   ├── 6.png                   # Service status and network port checks
+│   ├── 7.png                   # MySQL database and dedicated user creation
+│   ├── 8.png                   # MySQL table creation and sample data
+│   ├── 9.png                   # phpMyAdmin login screen
+│   ├── 10.png                  # phpMyAdmin database and table inspection
+│   ├── 11.png                  # Core PHP index.php stylesheet and structure
+│   ├── 12.png                  # Environment config (.env) and db.php layer
+│   ├── 13.png                  # Core PHP task table and CRUD logic
+│   ├── 14.png                  # Database schema dump via mysqldump
+│   ├── 15.png                  # Initial deployment path audit (404 error)
+│   ├── 16.png                  # Working application portal with live data
+│   ├── 18.png                  # Live portal with v1.0 release tag
+│   ├── 19.png                  # Simulated database outage symptom
+│   └── 20.png                  # Service inactive investigation and logs
 ├── .gitignore                  # Exclusion rules for secrets, dumps, and archives
 └── README.md                   # Complete operational manual
 ```
@@ -146,7 +144,7 @@ drwxrwxr-x 2 mukesh mukesh 4096 Oct 23 16:30 scripts
 ```
 
 ### Visual Evidence:
-![Project Initialization and Git Setup](screenshots/01_project_init.png)
+![Project Initialization and Git Setup](screenshots/1.png)
 
 ---
 
@@ -163,7 +161,7 @@ sudo apt install apache2 -y
 * **`sudo apt install apache2 -y`:** Installs the core Apache HTTP daemon. Apache acts as the reverse proxy and static/dynamic file web server listening on port 80. The `-y` flag avoids manual prompt interruptions during automated provisioning.
 
 #### Visual Evidence:
-![Apache Installation Output](screenshots/02_install_apache.png)
+![Apache Installation Output](screenshots/2.png)
 
 ---
 
@@ -177,7 +175,7 @@ sudo apt install mysql-server -y
 * Installing `mysql-server` provisions the `mysqld` background daemon, creates system tables, and registers `mysql.service` with systemd for auto-restart on system boots.
 
 #### Visual Evidence:
-![MySQL Server Installation Output](screenshots/03_install_mysql.png)
+![MySQL Server Installation Output](screenshots/3.png)
 
 ---
 
@@ -192,7 +190,7 @@ sudo apt install php libapache2-mod-php php-mysql -y
 * **`php-mysql`:** Installs the native PDO (`pdo_mysql`) and mysqli drivers. Without this driver, PHP code cannot connect to MySQL over port 3306 and throws fatal `Class 'PDO' not found` or `Driver not found` errors.
 
 #### Visual Evidence:
-![PHP Installation Output](screenshots/04_install_php.png)
+![PHP Installation Output](screenshots/4.png)
 
 ---
 
@@ -208,7 +206,7 @@ sudo apt install phpmyadmin
 * **`phpmyadmin`:** Graphical Web UI required by Task C to visually browse databases, manage table schemas, and perform SQL import/export routines.
 
 #### Visual Evidence:
-![Utilities and phpMyAdmin Installation](screenshots/05_install_tools_phpmyadmin.png)
+![Utilities and phpMyAdmin Installation](screenshots/5.png)
 
 ---
 
@@ -246,11 +244,7 @@ tcp   LISTEN 0      511              *:80               *:*    users:(("apache2"
 ```
 
 ### Visual Evidence:
-![Service Status and Port Checks](screenshots/06_service_and_port_checks.png)
-
-Navigated to `http://localhost/info.php` in the browser to verify PHP 8 engine execution:
-
-![PHP Info Page Verification](screenshots/07_phpinfo_browser.png)
+![Service Status and Port Checks](screenshots/6.png)
 
 ---
 
@@ -312,8 +306,8 @@ SELECT * FROM tasks;
 ```
 
 ### Visual Evidence:
-![MySQL Database and User Creation](screenshots/08_mysql_user_setup.png)
-![MySQL Table Creation and SELECT Query](screenshots/09_mysql_table_and_data.png)
+![MySQL Database and User Creation](screenshots/7.png)
+![MySQL Table Creation and SELECT Query](screenshots/8.png)
 
 ---
 
@@ -326,8 +320,8 @@ Task C mandates validating database administration through GUI tools. Logging in
 3. The user has no access to sensitive system tables like `mysql`, `performance_schema`, or other databases.
 
 ### Visual Evidence:
-![phpMyAdmin Authentication](screenshots/10_phpmyadmin_login.png)
-![phpMyAdmin Database Table Inspection](screenshots/11_phpmyadmin_dashboard.png)
+![phpMyAdmin Authentication](screenshots/9.png)
+![phpMyAdmin Database Table Inspection](screenshots/10.png)
 
 ---
 
@@ -358,7 +352,7 @@ EOF
 * **`app/.env.example`:** Serves as a version-controlled contract informing deployment scripts and developers which environment variables are mandatory.
 
 ### Visual Evidence:
-![Core PHP Code Creation](screenshots/13_app_code_creation.png)
+![Core PHP Code Creation](screenshots/12.png)
 
 ---
 
@@ -383,7 +377,7 @@ head -n 25 database/schema.sql
 3. **The `--no-tablespaces` Solution:** Adding `--no-tablespaces` tells `mysqldump` to dump only schema definitions and table data without attempting to read disk tablespaces. This allows the non-root application user to safely generate backups without needing elevated permissions.
 
 ### Visual Evidence:
-![Schema Export and Tablespaces Fix](screenshots/12_schema_export.png)
+![Schema Export and Tablespaces Fix](screenshots/14.png)
 
 ---
 
@@ -469,10 +463,9 @@ total size is 4,871  speedup is 2.50
 *(Notice: Only `index.php` was transferred, verifying delta synchronization).*
 
 ### Visual Evidence:
-![Initial 404 Not Found State](screenshots/14_initial_deploy_404.png)
-![Live Operations Portal](screenshots/15_live_app_portal.png)
-![Rsync Incremental Sync Output](screenshots/16_rsync_incremental.png)
-![Updated Application with v1.0 Badge](screenshots/17_app_v1_updated.png)
+![Initial 404 Not Found State](screenshots/15.png)
+![Live Operations Portal](screenshots/16.png)
+![Updated Application with v1.0 Badge](screenshots/18.png)
 
 ---
 
@@ -518,7 +511,7 @@ total size is 4,871  speedup is 2.50
 ```
 
 ### Visual Evidence:
-![Backup and Restore Verification](screenshots/18_backup_restore.png)
+![Backup and Restore Verification](screenshots/18.png)
 
 ---
 
@@ -558,7 +551,7 @@ echo "127.0.0.1 ssb-app.local" | sudo tee -a /etc/hosts
 3. **Dedicated Logging:** Directs errors to `ssb-app_error.log` instead of cluttering global server logs, speeding up incident investigation.
 
 ### Visual Evidence:
-![Apache Virtual Host Domain Verification](screenshots/21_virtualhost_browser.png)
+![Apache Virtual Host Domain Verification](screenshots/20.png)
 
 ---
 
@@ -620,7 +613,7 @@ Browsing to `http://ssb-app.local/index.php` triggered:
 `Database Connection Failed: SQLSTATE[HY000] [2002] No such file or directory` (or `Connection refused`).
 
 ### Visual Evidence:
-![Database Outage Error in Browser](screenshots/19_troubleshooting_db_error.png)
+![Database Outage Error in Browser](screenshots/19.png)
 
 ### 15.2 Diagnostic Investigation & Log Audit
 ```bash
@@ -633,7 +626,7 @@ sudo tail -n 10 /var/log/apache2/error.log
 * **`/var/log/apache2/error.log`:** When PHP PDO fails, Apache logs the specific failure mechanism. The logs indicated that PHP could not locate the UNIX domain socket `/var/run/mysqld/mysqld.sock` because the daemon was halted.
 
 ### Visual Evidence:
-![Service Inactive Status and Error Logs](screenshots/20_service_inactive_logs.png)
+![Service Inactive Status and Error Logs](screenshots/20.png)
 
 ### 15.3 Resolution & Incident Documentation
 ```bash
@@ -672,14 +665,14 @@ sudo systemctl start mysql
 
 | Requirement Category | Specific Deliverable / Evidence | Verification Status |
 | :--- | :--- | :---: |
-| **LAMP Setup & Checks (Task A)** | Apache & MySQL daemons active, Port 80 & 3306 audited, `screenshots/06_service_and_port_checks.png`, `07_phpinfo_browser.png` | ✅ Complete (20/20 pts) |
-| **MySQL & phpMyAdmin (Task C)** | Database `ssb_db`, table `tasks`, sample records, `schema.sql`, `screenshots/09_mysql_table_and_data.png`, `11_phpmyadmin_dashboard.png` | ✅ Complete (20/20 pts) |
-| **Core PHP App (Task B)** | Read records, Create action, Update action, secret isolation via `.env`, `screenshots/15_live_app_portal.png` | ✅ Complete (15/15 pts) |
-| **Rsync Deployment (Task D)** | Idempotent `deploy.sh`, dry-run support, delta updates verified, `screenshots/16_rsync_incremental.png`, `17_app_v1_updated.png` | ✅ Complete (15/15 pts) |
-| **Backup & Restore (Task F)** | `backup.sh` (dump & tar.gz), `restore.sh` restoring into `ssb_test_db`, `screenshots/18_backup_restore.png` | ✅ Complete (10/10 pts) |
+| **LAMP Setup & Checks (Task A)** | Apache & MySQL daemons active, Port 80 & 3306 audited, `screenshots/6.png` | ✅ Complete (20/20 pts) |
+| **MySQL & phpMyAdmin (Task C)** | Database `ssb_db`, table `tasks`, sample records, `schema.sql`, `screenshots/8.png`, `10.png` | ✅ Complete (20/20 pts) |
+| **Core PHP App (Task B)** | Read records, Create action, Update action, secret isolation via `.env`, `screenshots/16.png` | ✅ Complete (15/15 pts) |
+| **Rsync Deployment (Task D)** | Idempotent `deploy.sh`, dry-run support, delta updates verified, `screenshots/16.png`, `18.png` | ✅ Complete (15/15 pts) |
+| **Backup & Restore (Task F)** | `backup.sh` (dump & tar.gz), `restore.sh` restoring into `ssb_test_db`, `screenshots/18.png` | ✅ Complete (10/10 pts) |
 | **Security & Permissions (Task G)** | Non-root DB user (`ssb_user`), `.env.example`, `755`/`644` permissions, zero 777 permissions | ✅ Complete (10/10 pts) |
-| **Incident Troubleshooting (Task H)** | Outage simulated, log investigation, `docs/incident-note.md`, `screenshots/19_troubleshooting_db_error.png`, `20_service_inactive_logs.png` | ✅ Complete (10/10 pts) |
-| **Bonus: Apache Virtual Host** | Configured `ssb-app.local` via `/etc/apache2/sites-available/ssb-app.conf`, `/etc/hosts`, and verified in `screenshots/21_virtualhost_browser.png` | 🌟 Complete (+Bonus) |
+| **Incident Troubleshooting (Task H)** | Outage simulated, log investigation, `docs/incident-note.md`, `screenshots/19.png`, `20.png` | ✅ Complete (10/10 pts) |
+| **Bonus: Apache Virtual Host** | Configured `ssb-app.local` via `/etc/apache2/sites-available/ssb-app.conf`, `/etc/hosts`, and verified in `screenshots/20.png` | 🌟 Complete (+Bonus) |
 | **Bonus: Backup Retention & Cron** | 7-day retention cleanup in `backup.sh` and production cron template `scripts/crontab.example` | 🌟 Complete (+Bonus) |
 | **Bonus: CI Pipeline (GitHub Actions)** | Continuous syntax check workflow configured at `.github/workflows/php-lint.yml` | 🌟 Complete (+Bonus) |
 | **Bonus: Health-Check Script** | Active monitoring probe in `scripts/health-check.sh` exiting non-zero on service failure | 🌟 Complete (+Bonus) |
