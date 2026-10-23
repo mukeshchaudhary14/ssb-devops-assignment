@@ -665,17 +665,17 @@ sudo systemctl start mysql
 
 | Requirement Category | Specific Deliverable / Evidence | Verification Status |
 | :--- | :--- | :---: |
-| **LAMP Setup & Checks (Task A)** | Apache & MySQL daemons active, Port 80 & 3306 audited, `screenshots/6.png` | ✅ Complete (20/20 pts) |
-| **MySQL & phpMyAdmin (Task C)** | Database `ssb_db`, table `tasks`, sample records, `schema.sql`, `screenshots/8.png`, `10.png` | ✅ Complete (20/20 pts) |
-| **Core PHP App (Task B)** | Read records, Create action, Update action, secret isolation via `.env`, `screenshots/16.png` | ✅ Complete (15/15 pts) |
-| **Rsync Deployment (Task D)** | Idempotent `deploy.sh`, dry-run support, delta updates verified, `screenshots/16.png`, `18.png` | ✅ Complete (15/15 pts) |
-| **Backup & Restore (Task F)** | `backup.sh` (dump & tar.gz), `restore.sh` restoring into `ssb_test_db`, `screenshots/18.png` | ✅ Complete (10/10 pts) |
-| **Security & Permissions (Task G)** | Non-root DB user (`ssb_user`), `.env.example`, `755`/`644` permissions, zero 777 permissions | ✅ Complete (10/10 pts) |
-| **Incident Troubleshooting (Task H)** | Outage simulated, log investigation, `docs/incident-note.md`, `screenshots/19.png`, `20.png` | ✅ Complete (10/10 pts) |
-| **Bonus: Apache Virtual Host** | Configured `ssb-app.local` via `/etc/apache2/sites-available/ssb-app.conf`, `/etc/hosts`, and verified in `screenshots/20.png` | 🌟 Complete (+Bonus) |
-| **Bonus: Backup Retention & Cron** | 7-day retention cleanup in `backup.sh` and production cron template `scripts/crontab.example` | 🌟 Complete (+Bonus) |
-| **Bonus: CI Pipeline (GitHub Actions)** | Continuous syntax check workflow configured at `.github/workflows/php-lint.yml` | 🌟 Complete (+Bonus) |
-| **Bonus: Health-Check Script** | Active monitoring probe in `scripts/health-check.sh` exiting non-zero on service failure | 🌟 Complete (+Bonus) |
+| **LAMP Setup & Checks (Task A)** | Apache & MySQL daemons active, Port 80 & 3306 audited, `screenshots/6.png` | ✅ Complete  |
+| **MySQL & phpMyAdmin (Task C)** | Database `ssb_db`, table `tasks`, sample records, `schema.sql`, `screenshots/8.png`, `10.png` | ✅ Complete  |
+| **Core PHP App (Task B)** | Read records, Create action, Update action, secret isolation via `.env`, `screenshots/16.png` | ✅ Complete  |
+| **Rsync Deployment (Task D)** | Idempotent `deploy.sh`, dry-run support, delta updates verified, `screenshots/16.png`, `18.png` | ✅ Complete  |
+| **Backup & Restore (Task F)** | `backup.sh` (dump & tar.gz), `restore.sh` restoring into `ssb_test_db`, `screenshots/18.png` | ✅ Complete  |
+| **Security & Permissions (Task G)** | Non-root DB user (`ssb_user`), `.env.example`, `755`/`644` permissions, zero 777 permissions | ✅ Complete  |
+| **Incident Troubleshooting (Task H)** | Outage simulated, log investigation, `docs/incident-note.md`, `screenshots/19.png`, `20.png` | ✅ Complete  |
+| **Bonus: Apache Virtual Host** | Configured `ssb-app.local` via `/etc/apache2/sites-available/ssb-app.conf`, `/etc/hosts`, and verified in `screenshots/20.png` | 🌟 Complete  |
+| **Bonus: Backup Retention & Cron** | 7-day retention cleanup in `backup.sh` and production cron template `scripts/crontab.example` | 🌟 Complete  |
+| **Bonus: CI Pipeline (GitHub Actions)** | Continuous syntax check workflow configured at `.github/workflows/php-lint.yml` | 🌟 Complete  |
+| **Bonus: Health-Check Script** | Active monitoring probe in `scripts/health-check.sh` exiting non-zero on service failure | 🌟 Complete |
 
 ---
 
